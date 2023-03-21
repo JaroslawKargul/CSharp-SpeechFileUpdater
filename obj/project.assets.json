@@ -2,6 +2,32 @@
   "version": 3,
   "targets": {
     ".NETCoreApp,Version=v3.1": {
+      "Microsoft.CSharp/4.5.0": {
+        "type": "package",
+        "compile": {
+          "ref/netcoreapp2.0/_._": {}
+        },
+        "runtime": {
+          "lib/netcoreapp2.0/_._": {}
+        }
+      },
+      "NeoLua/1.3.14": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.CSharp": "4.5.0"
+        },
+        "compile": {
+          "lib/netcoreapp2.1/Neo.Lua.dll": {}
+        },
+        "runtime": {
+          "lib/netcoreapp2.1/Neo.Lua.dll": {}
+        },
+        "resource": {
+          "lib/netcoreapp2.1/de/Neo.Lua.resources.dll": {
+            "locale": "de"
+          }
+        }
+      },
       "Newtonsoft.Json/13.0.3": {
         "type": "package",
         "compile": {
@@ -10,23 +36,109 @@
         "runtime": {
           "lib/netstandard2.0/Newtonsoft.Json.dll": {}
         }
-      },
-      "VikingErik.LuaInterface/1.0.4213.34901": {
-        "type": "package",
-        "compile": {
-          "lib/net35/LuaInterface.dll": {},
-          "lib/net35/VikingErik.LuaInterface.dll": {},
-          "lib/net35/lua51.dll": {}
-        },
-        "runtime": {
-          "lib/net35/LuaInterface.dll": {},
-          "lib/net35/VikingErik.LuaInterface.dll": {},
-          "lib/net35/lua51.dll": {}
-        }
       }
     }
   },
   "libraries": {
+    "Microsoft.CSharp/4.5.0": {
+      "sha512": "kaj6Wb4qoMuH3HySFJhxwQfe8R/sJsNJnANrvv8WdFPMoNbKY5htfNscv+LHCu5ipz+49m2e+WQXpLXr9XYemQ==",
+      "type": "package",
+      "path": "microsoft.csharp/4.5.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/MonoAndroid10/_._",
+        "lib/MonoTouch10/_._",
+        "lib/net45/_._",
+        "lib/netcore50/Microsoft.CSharp.dll",
+        "lib/netcoreapp2.0/_._",
+        "lib/netstandard1.3/Microsoft.CSharp.dll",
+        "lib/netstandard2.0/Microsoft.CSharp.dll",
+        "lib/portable-net45+win8+wp8+wpa81/_._",
+        "lib/uap10.0.16299/_._",
+        "lib/win8/_._",
+        "lib/wp80/_._",
+        "lib/wpa81/_._",
+        "lib/xamarinios10/_._",
+        "lib/xamarinmac20/_._",
+        "lib/xamarintvos10/_._",
+        "lib/xamarinwatchos10/_._",
+        "microsoft.csharp.4.5.0.nupkg.sha512",
+        "microsoft.csharp.nuspec",
+        "ref/MonoAndroid10/_._",
+        "ref/MonoTouch10/_._",
+        "ref/net45/_._",
+        "ref/netcore50/Microsoft.CSharp.dll",
+        "ref/netcore50/Microsoft.CSharp.xml",
+        "ref/netcore50/de/Microsoft.CSharp.xml",
+        "ref/netcore50/es/Microsoft.CSharp.xml",
+        "ref/netcore50/fr/Microsoft.CSharp.xml",
+        "ref/netcore50/it/Microsoft.CSharp.xml",
+        "ref/netcore50/ja/Microsoft.CSharp.xml",
+        "ref/netcore50/ko/Microsoft.CSharp.xml",
+        "ref/netcore50/ru/Microsoft.CSharp.xml",
+        "ref/netcore50/zh-hans/Microsoft.CSharp.xml",
+        "ref/netcore50/zh-hant/Microsoft.CSharp.xml",
+        "ref/netcoreapp2.0/_._",
+        "ref/netstandard1.0/Microsoft.CSharp.dll",
+        "ref/netstandard1.0/Microsoft.CSharp.xml",
+        "ref/netstandard1.0/de/Microsoft.CSharp.xml",
+        "ref/netstandard1.0/es/Microsoft.CSharp.xml",
+        "ref/netstandard1.0/fr/Microsoft.CSharp.xml",
+        "ref/netstandard1.0/it/Microsoft.CSharp.xml",
+        "ref/netstandard1.0/ja/Microsoft.CSharp.xml",
+        "ref/netstandard1.0/ko/Microsoft.CSharp.xml",
+        "ref/netstandard1.0/ru/Microsoft.CSharp.xml",
+        "ref/netstandard1.0/zh-hans/Microsoft.CSharp.xml",
+        "ref/netstandard1.0/zh-hant/Microsoft.CSharp.xml",
+        "ref/netstandard2.0/Microsoft.CSharp.dll",
+        "ref/netstandard2.0/Microsoft.CSharp.xml",
+        "ref/portable-net45+win8+wp8+wpa81/_._",
+        "ref/uap10.0.16299/_._",
+        "ref/win8/_._",
+        "ref/wp80/_._",
+        "ref/wpa81/_._",
+        "ref/xamarinios10/_._",
+        "ref/xamarinmac20/_._",
+        "ref/xamarintvos10/_._",
+        "ref/xamarinwatchos10/_._",
+        "useSharedDesignerContext.txt",
+        "version.txt"
+      ]
+    },
+    "NeoLua/1.3.14": {
+      "sha512": "BXIUN+ePY2wx3ZGiSmR8KZKD85s01pXI690orrB3u/biB8R0nalziGw+iGbPBq1Cuz8Upggpw2ERF84POXWTCQ==",
+      "type": "package",
+      "path": "neolua/1.3.14",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net45/Neo.Lua.dll",
+        "lib/net45/Neo.Lua.pdb",
+        "lib/net45/Neo.Lua.xml",
+        "lib/net45/de/Neo.Lua.resources.dll",
+        "lib/net47/Neo.Lua.dll",
+        "lib/net47/Neo.Lua.pdb",
+        "lib/net47/Neo.Lua.xml",
+        "lib/net47/de/Neo.Lua.resources.dll",
+        "lib/net5.0/Neo.Lua.dll",
+        "lib/net5.0/Neo.Lua.pdb",
+        "lib/net5.0/Neo.Lua.xml",
+        "lib/net5.0/de/Neo.Lua.resources.dll",
+        "lib/netcoreapp2.1/Neo.Lua.dll",
+        "lib/netcoreapp2.1/Neo.Lua.pdb",
+        "lib/netcoreapp2.1/Neo.Lua.xml",
+        "lib/netcoreapp2.1/de/Neo.Lua.resources.dll",
+        "lib/netstandard2.0/Neo.Lua.dll",
+        "lib/netstandard2.0/Neo.Lua.pdb",
+        "lib/netstandard2.0/Neo.Lua.xml",
+        "lib/netstandard2.0/de/Neo.Lua.resources.dll",
+        "neolua.1.3.14.nupkg.sha512",
+        "neolua.nuspec"
+      ]
+    },
     "Newtonsoft.Json/13.0.3": {
       "sha512": "HrC5BXdl00IP9zeV+0Z848QWPAoCr9P3bDEZguI+gkLcBKAOxix/tLEAAHC+UvDNPv4a2d18lOReHMOagPa+zQ==",
       "type": "package",
@@ -56,26 +168,12 @@
         "newtonsoft.json.nuspec",
         "packageIcon.png"
       ]
-    },
-    "VikingErik.LuaInterface/1.0.4213.34901": {
-      "sha512": "oFt90CF9L84YnLNw5sSpVny0WzkCC/CL0KR6Il3M7bAw9gaPPmbyEBnfb/t0xulv0BCzEiE8/B/tKY/ZTLOwYQ==",
-      "type": "package",
-      "path": "vikingerik.luainterface/1.0.4213.34901",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "lib/net35/LuaInterface.dll",
-        "lib/net35/VikingErik.LuaInterface.dll",
-        "lib/net35/lua51.dll",
-        "vikingerik.luainterface.1.0.4213.34901.nupkg.sha512",
-        "vikingerik.luainterface.nuspec"
-      ]
     }
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
-      "Newtonsoft.Json >= 13.0.3",
-      "VikingErik.LuaInterface >= 1.0.4213.34901"
+      "NeoLua >= 1.3.14",
+      "Newtonsoft.Json >= 13.0.3"
     ]
   },
   "packageFolders": {
@@ -117,13 +215,13 @@
       "netcoreapp3.1": {
         "targetAlias": "netcoreapp3.1",
         "dependencies": {
+          "NeoLua": {
+            "target": "Package",
+            "version": "[1.3.14, )"
+          },
           "Newtonsoft.Json": {
             "target": "Package",
             "version": "[13.0.3, )"
-          },
-          "VikingErik.LuaInterface": {
-            "target": "Package",
-            "version": "[1.0.4213.34901, )"
           }
         },
         "imports": [
@@ -153,17 +251,5 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.408\\RuntimeIdentifierGraph.json"
       }
     }
-  },
-  "logs": [
-    {
-      "code": "NU1701",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Package 'VikingErik.LuaInterface 1.0.4213.34901' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework '.NETCoreApp,Version=v3.1'. This package may not be fully compatible with your project.",
-      "libraryId": "VikingErik.LuaInterface",
-      "targetGraphs": [
-        ".NETCoreApp,Version=v3.1"
-      ]
-    }
-  ]
+  }
 }

@@ -1,4 +1,4 @@
-﻿using LuaInterface;
+﻿using Neo.IronLua;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using SpeechFileUpdater.Forms;
 
 namespace SpeechFileUpdater.Utils
 {
@@ -24,18 +25,25 @@ namespace SpeechFileUpdater.Utils
 
         public static void ParseLuaTable(LuaTable luaTable, DataGridView dataGridView, string prefix = "")
         {
-            foreach (object objKey in luaTable.Keys)
-            {
-                string keyLua = objKey.ToString();
-                string valueLua = luaTable[objKey].ToString();
+            IEnumerator<KeyValuePair<object, object>> enumerator = luaTable.GetEnumerator();
 
-                if (luaTable[objKey].GetType().Name == "String")
+            while (enumerator.MoveNext())
+            {
+                string keyLua = enumerator.Current.Key.ToString();
+                string valueLua = enumerator.Current.Value.ToString();
+
+                if (String.IsNullOrEmpty($"{keyLua}".Trim()))
                 {
-                    valueLua = MainFormUtils.RemoveMultilines(luaTable[objKey]);
+                    continue;
+                }
+
+                if (enumerator.Current.Value.GetType().Name == "String")
+                {
+                    valueLua = MainFormUtils.RemoveMultilines(enumerator.Current.Value);
                     valueLua = valueLua.Replace("\"", "\\\"");
                 }
 
-                if (luaTable[objKey].GetType().Name == "LuaTable")
+                if (enumerator.Current.Value.GetType().Name == "LuaTable")
                 {
                     string nestedPrefix = string.Empty;
 
@@ -48,7 +56,7 @@ namespace SpeechFileUpdater.Utils
                         nestedPrefix = keyLua;
                     }
 
-                    LuaTable luaTableNested = (LuaTable)luaTable[objKey];
+                    LuaTable luaTableNested = (LuaTable)luaTable[enumerator.Current.Key];
                     ParseLuaTable(luaTableNested, dataGridView, nestedPrefix);
                 }
                 else
@@ -213,7 +221,6 @@ namespace SpeechFileUpdater.Utils
 
                 if (key.Contains('.') && !processedRootKeys.Contains(keyRoot))
                 {
-                    //MessageBox.Show(key);
                     processedRootKeys.Add(keyRoot);
 
                     Dictionary<string, string> rowsWithTheSameRoot = GetRowsWithTheSameRoot(key, dataGridView.Rows);
@@ -241,8 +248,12 @@ namespace SpeechFileUpdater.Utils
             }
         }
 
-        public static Dictionary<string, int> CompareDataGridViewsAndMarkDifferences(DataGridView dataGridView, DataGridView dataGridViewToCompareTo)
+        public static Dictionary<string, int> CompareDataGridViewsAndMarkDifferences(DataGridView dataGridView, DataGridView dataGridViewToCompareTo, Form parentForm)
         {
+            PleaseWaitForm pleaseWaitForm = new PleaseWaitForm();
+            pleaseWaitForm.Show(parentForm);
+            pleaseWaitForm.Refresh();
+
             List<DataGridViewRow> matchingRows = CompareDataGridViewsAndReturnMatches(dataGridViewToCompareTo, dataGridView, true);
             Dictionary<string, int> matchCounts = new Dictionary<string, int>()
             {
@@ -290,6 +301,8 @@ namespace SpeechFileUpdater.Utils
                 matchCounts["key_not_found_red"]++;
                 dataRow.DefaultCellStyle.BackColor = Color.LightPink;
             }
+
+            pleaseWaitForm.Close();
 
             return matchCounts;
         }
@@ -503,6 +516,10 @@ namespace SpeechFileUpdater.Utils
 
         public static void CopyMissingKeysBetweenDataGrids(Form parentForm, DataGridView dgCopyFrom, DataGridView dgCopyTo)
         {
+            PleaseWaitForm pleaseWaitForm = new PleaseWaitForm();
+            pleaseWaitForm.Show(parentForm);
+            pleaseWaitForm.Refresh();
+
             // Copy missing keys from table "dgCopyFrom" to table "dgCopyTo"
             List<DataGridViewRow> matchingRows = CompareDataGridViewsAndReturnMatches(dgCopyFrom, dgCopyTo);
             List<DataGridViewRow> notMatchingRows = new List<DataGridViewRow>();
@@ -563,6 +580,8 @@ namespace SpeechFileUpdater.Utils
                 rowsCopied++;
                 dgCopyTo.Rows.Add(row);
             }
+
+            pleaseWaitForm.Close();
 
             if (rowsCopied > 0)
             {

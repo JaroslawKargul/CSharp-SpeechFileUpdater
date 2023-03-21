@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using LuaInterface;
+using Neo.IronLua;
 using SpeechFileUpdater.Utils;
 using static SpeechFileUpdater.Utils.MainFormUtils;
 using static SpeechFileUpdater.Utils.DataGridWrangler;
@@ -203,11 +203,15 @@ namespace SpeechFileUpdater.Forms
 
         public void LoadLuaTableFromFile(string luaFilePath, DataGridView dataGridView)
         {
-            Lua luaInterpreter = new Lua();
-            object[] executedFile = null;
+            LuaTable luaTable = null;
             try
             {
-                executedFile = luaInterpreter.DoFile(luaFilePath);
+                using (Lua runtime = new Lua())
+                {
+                    LuaGlobal environment = runtime.CreateEnvironment();
+                    LuaResult executionResults = environment.DoChunk(luaFilePath);
+                    luaTable = (LuaTable)executionResults[0];
+                }
             }
             catch(Exception ex)
             {
@@ -227,11 +231,34 @@ namespace SpeechFileUpdater.Forms
                 return;
             }
 
-            foreach (object objTable in executedFile)
+            DataGridView virtualDataGrid = new DataGridView();
+            virtualDataGrid.AllowUserToAddRows = false;
+            virtualDataGrid.Rows.Clear();
+
+            foreach (DataGridViewColumn col in dataGridView.Columns)
             {
-                LuaTable luaTable = (LuaTable)objTable;
-                ParseLuaTable(luaTable, dataGridView);
+                virtualDataGrid.Columns.Add((DataGridViewColumn)col.Clone());
             }
+
+            ParseLuaTable(luaTable, virtualDataGrid);
+
+            DataGridViewRow[] theRows = new DataGridViewRow[virtualDataGrid.Rows.Count];
+            for (int i = 0; i < virtualDataGrid.Rows.Count; i++)
+            {
+                DataGridViewRow row = (DataGridViewRow)virtualDataGrid.Rows[i].Clone();
+                for (int j = 0; j < virtualDataGrid.Columns.Count; j++)
+                {
+                    row.Cells[j].Value = virtualDataGrid.Rows[i].Cells[j].Value;
+                }
+                theRows[i] = row;
+            }
+
+            foreach (DataGridViewRow row in theRows)
+            {
+                dataGridView.Rows.Add(row);
+            }
+
+            virtualDataGrid.Dispose();
 
             dataGridView.Sort(dataGridView.Columns[0], ListSortDirection.Ascending);
             dataGridView.Columns[0].ReadOnly = true;
@@ -359,7 +386,7 @@ namespace SpeechFileUpdater.Forms
                 return;
             }
             // Missing in left DataGridView compared to the right one
-            Dictionary<string, int> matchCounts = CompareDataGridViewsAndMarkDifferences(dataGridView1, dataGridView2);
+            Dictionary<string, int> matchCounts = CompareDataGridViewsAndMarkDifferences(dataGridView1, dataGridView2, this);
            
             string titleText = "Mark Differences";
             string labelText = $"Compared and marked following amounts of rows in left table:\n- Exact same rows as in right table (yellow): {matchCounts["same_keyvaluepair_yellow"]}\n- Rows not existing in right table (red): {matchCounts["key_not_found_red"]}";
@@ -373,7 +400,7 @@ namespace SpeechFileUpdater.Forms
                 return;
             }
             // Missing in right DataGridView compared to the left one
-            Dictionary<string, int> matchCounts = CompareDataGridViewsAndMarkDifferences(dataGridView2, dataGridView1);
+            Dictionary<string, int> matchCounts = CompareDataGridViewsAndMarkDifferences(dataGridView2, dataGridView1, this);
             
             string labelText = $"Compared and marked following amounts of rows in right table:\n- Exact same rows as in left table (yellow): {matchCounts["same_keyvaluepair_yellow"]}\n- Rows not existing in left table (red): {matchCounts["key_not_found_red"]}";
             string titleText = "Mark Differences";

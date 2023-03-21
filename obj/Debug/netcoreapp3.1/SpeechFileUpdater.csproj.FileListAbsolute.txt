@@ -4,9 +4,6 @@ C:\Users\JarekK\source\repos\SpeechFileUpdater\bin\Debug\netcoreapp3.1\SpeechFil
 C:\Users\JarekK\source\repos\SpeechFileUpdater\bin\Debug\netcoreapp3.1\SpeechFileUpdater.runtimeconfig.dev.json
 C:\Users\JarekK\source\repos\SpeechFileUpdater\bin\Debug\netcoreapp3.1\SpeechFileUpdater.dll
 C:\Users\JarekK\source\repos\SpeechFileUpdater\bin\Debug\netcoreapp3.1\SpeechFileUpdater.pdb
-C:\Users\JarekK\source\repos\SpeechFileUpdater\bin\Debug\netcoreapp3.1\LuaInterface.dll
-C:\Users\JarekK\source\repos\SpeechFileUpdater\bin\Debug\netcoreapp3.1\VikingErik.LuaInterface.dll
-C:\Users\JarekK\source\repos\SpeechFileUpdater\bin\Debug\netcoreapp3.1\lua51.dll
 C:\Users\JarekK\source\repos\SpeechFileUpdater\obj\Debug\netcoreapp3.1\SpeechFileUpdater.csproj.AssemblyReference.cache
 C:\Users\JarekK\source\repos\SpeechFileUpdater\obj\Debug\netcoreapp3.1\SpeechFileUpdater.csproj.GenerateResource.cache
 C:\Users\JarekK\source\repos\SpeechFileUpdater\obj\Debug\netcoreapp3.1\SpeechFileUpdater.GeneratedMSBuildEditorConfig.editorconfig
@@ -23,3 +20,6 @@ C:\Users\JarekK\source\repos\SpeechFileUpdater\obj\Debug\netcoreapp3.1\SpeechFil
 C:\Users\JarekK\source\repos\SpeechFileUpdater\obj\Debug\netcoreapp3.1\SpeechFileUpdater.Forms.PopUpForm.resources
 C:\Users\JarekK\source\repos\SpeechFileUpdater\obj\Debug\netcoreapp3.1\SpeechFileUpdater.Forms.PopUpYesNoForm.resources
 C:\Users\JarekK\source\repos\SpeechFileUpdater\obj\Debug\netcoreapp3.1\SpeechFileUpdater.Forms.SettingsForm.resources
+C:\Users\JarekK\source\repos\SpeechFileUpdater\bin\Debug\netcoreapp3.1\Neo.Lua.dll
+C:\Users\JarekK\source\repos\SpeechFileUpdater\bin\Debug\netcoreapp3.1\de\Neo.Lua.resources.dll
+C:\Users\JarekK\source\repos\SpeechFileUpdater\obj\Debug\netcoreapp3.1\SpeechFileUpdater.Forms.PleaseWaitForm.resources

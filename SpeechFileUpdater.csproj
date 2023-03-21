@@ -16,8 +16,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="NeoLua" Version="1.3.14" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-    <PackageReference Include="VikingErik.LuaInterface" Version="1.0.4213.34901" />
   </ItemGroup>
 
   <ItemGroup>
